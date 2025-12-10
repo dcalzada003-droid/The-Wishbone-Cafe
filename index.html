@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wishbone Café</title>
+    <meta name="description" content="Donde los deseos se sirven caliente.">
+    <meta name="keywords" content="wishbone, the wishbone café, cafetería, deseos, suerte, tréboles, gatos negros, angel numbers, café temático">
+    <meta name="author" content="Dana Calzada">
+    <meta name="copyright" content="The Wishbone Café">
+    <meta name="application-name" content="The Wishbone Café">
+
+    <!--Bootstrap CSS (CDN)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+    rel="stylesheet">
+    
+    <!-- AGREGADO: Font Awesome para que aparezca el ícono de WhatsApp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!-- ← AGREGADO -->
+    
+    <!--CSS-->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- AGREGADO: Estilos mínimos del botón flotante (puedes moverlos a styles.css si quieres) -->
+    <style>
+      .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #25D366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        text-decoration: none;
+      }
+
+      .whatsapp-float:hover {
+        background: #1ebe5d;
+        color: white;
+        transform: scale(1.05);
+        transition: transform 0.15s ease;
+      }
+
+      /* Estilos para el botón flotante del carrito */
+      .cart-float{
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        background: #ffca28;
+        color: #222;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+        font-weight: 700;
+        z-index: 10000;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        text-decoration: none;
+      }
+      .cart-float:hover{ transform: scale(1.06); }
+
+      /* Ajustes pequeños para el offcanvas del carrito */
+      #carrito .list-group-item .qty-controls button {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+      }
+    </style>
+</head>
+
+<body>
+<!--==========NAVBAR==========
+Menú superior, se vuelve botón hamburguesa en móviles-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" aria-label="Navegación principal">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <!--Logo de mi marca-->
+         <img src="img/The WB café.png" height="100" class="align-text-top me-2" alt="Logo The Wishbone Café">
+      <span class="fw-semibold">The Wishbone Café</span>
+    </a>
+
+    <!--Botón hamburguesa-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#mainNavbar" aria-expanded="false" 
+    aria-label="Alternar navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--Enlaces del menú-->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
+        <li class="nav-item"> 
+          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#catalogo">Menú</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacto">Contacto</a>
+        </li>
+        <li class="nav-item">
+  <a class="nav-link position-relative" data-bs-toggle="offcanvas" href="#carrito">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="contadorCarrito" 
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      0
+    </span>
+  </a>
+</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!--==========CARRUSEL VAMOS A AGREGAR IMAGENES DE NUESTRA PÁGINA===========-->
+<div id="mainCarousel" class="carousel slide mb-4" data-bs-ride="carousel" aria-label="Promociones de temporada">
+
+  <!-- Indicadores -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <div class="carousel-inner rounded-3 shadow-sm">
+
+    <!-- Slide 1 -->
+    <div class="carousel-item active">
+      <img src="img/StarCup.jpg" class="d-block w-100" alt="Star Cup" style="height:380px; object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block text-start">
+        <h5>Star Cup</h5>
+        <p>Shapes in the sky to invent our connection</p>
+        <a href="#productos" class="btn btn-primary">Ver Productos</a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-item">
+      <img src="img/Banner2.png" class="d-block w-100" alt="Wishbone Cup" style="height:380px; object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Wishbone Cup</h5>
+        <p> Never breaks even </p>
+        <a href="#productos" class="btn btn-light btn-sm">Ver Productos</a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-item">
+      <img src="img/BANNER3.png" class="d-block w-100" alt="Visita The Wishbone Café" style="height:380px; object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block text-end">
+        <h5>Visita nuestra sucursal</h5>
+        <p>Vive nuestra experiencia</p>
+        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalIA">Más información</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--======BOTONES======
+<section class="container my-5">
+  <h2>Botones (Buttons)</h2>
+  <button class="btn btn-primary">Primario</button>
+  <button class="btn btn-secondary">Secundario</button>
+  <button class="btn btn-success">Éxito</button>
+  <button class="btn btn-danger">Peligro</button>
+  <button class="btn btn-warning">Advertencia</button>
+======--> 
+</section>
+
+<!--======ALERTAS======-->
+<section class="container my-5">
+  <h2>Alertas (Alerts)</h2>
+  <div class="alert alert-info" role="alert">
+    Descubre nuestras bebidas temáticas y postres especiales.
+  </div>
+</section>
+
+<!--======TARJETAS======-->
+<section class="container my-5" id="Menú">
+    <h2 class="mb-4">Especialidades de The Wishbone Café</h2>
+    <div class="row g-4">
+
+        <!-- TARJETA 1 -->
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="img/tarjeta1.jpg" class="card-img-top" alt="Colección de Navidad">
+                
+                <div class="card-body">
+                    <h5 class="card-title nombre-producto">Colección de Deseos (Navidad)</h5>
+                    <p class="card-text">
+                        Encuentra bebidas y regalos temáticos para celebrar la temporada con un toque de suerte.
+                    </p>
+
+                    <!-- PRECIO -->
+                    <p class="precio-producto" style="font-weight:bold; font-size:18px;">120</p>
+
+                    <!-- BOTÓN -->
+                    <button class="btn btn-primary btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETA 2 -->
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="img/tarjeta2.jpg" class="card-img-top" alt="Galletas y amuletos personalizados">
+
+                <div class="card-body">
+                    <h5 class="card-title nombre-producto">Deseos Personalizados</h5>
+                    <p class="card-text">
+                        Cuéntanos tu deseo y crearemos una bebida o postre único para ti.
+                    </p>
+
+                    <!-- PRECIO -->
+                    <p class="precio-producto" style="font-weight:bold; font-size:18px;">89</p>
+
+                    <!-- BOTÓN -->
+                    <button class="btn btn-success btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETA 3 -->
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="img/tarjeta3.jpg" class="card-img-top" alt="Taller de amuletos">
+
+                <div class="card-body">
+                    <h5 class="card-title nombre-producto">Taller de Amuletos y Esferas</h5>
+                    <p class="card-text">
+                        Aprende a crear tus amuletos de la suerte y decora con tus símbolos favoritos.
+                    </p>
+
+                    <!-- PRECIO -->
+                    <p class="precio-producto" style="font-weight:bold; font-size:18px;">150</p>
+
+                    <!-- BOTÓN -->
+                    <button class="btn btn-success btn-agregar">Agregar al carrito</button>
+                </div>
+
+                <div class="card-footer">
+                    ¡Inscríbete ahora y asegura tu lugar!
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+        <!--======FORMULARIO DE INSCRIPCIÓN=====-->
+  <section class="container my-5" id="contacto">
+    <h2> Formulario de inscripción</h2>
+    <form class="p-4 border rounded bg-light shadow-sm">
+      <!--Nombre-->
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre Completo</label> 
+        <input type="text" class="form.control" id="nombre"
+        placeholder="Ingrese su nombre completo">
+      </div>
+      <!--TALLER-->
+        <div class="mb-3">
+          <label for="taller-Select" class="from-label"> Selecciona el Taller</label>
+          <select class="form-select" id="taller-Select">
+            <option selected> Elige un taller...</option>
+            <option value="1">Taller de repostería</option>
+            <option value="2">Taller de elaboración de amuletos</option>
+            <option value="3">Taller de elaboración de bebidas</option>
+          </select>
+        </div>
+        <!--MODALIDAD-->
+      <div class="mb-4">
+        <label class="form-label">Modalidad</label><br>
+        <input class="form-check-input" type="radio" name="modalidad"
+        id="Presencial">
+        <label for="Presencial">
+          Presencial </label><br>
+          <input class="form-check-input" type="radio" name="modalidad"
+          id="online" checked>
+          <label for="online"></label>
+          Online </label>
+      </div>
+  
+    <!--Comentarios-->
+    <div class="mb-3">
+      <label for="Mensaje" class="form-label"> Comentarios Adicionales </label>
+      <textarea class="Mensaje" class="form-control" rows="3" 
+      placeholder="Escribe aquí tus comentarios"></textarea>
+    </div>
+
+    <!--Botón de envío-->
+      <div class="text-center">
+        <button type="submit" class="btn btn-success"> Enviar Inscripción</button>
+      </div>
+    </form>
+  </section>
+
+
+  <!--=========TESTIMONIOS========-->
+<section class="container my-5">
+  <h2> Testimonios de nuestros clientes </h2>
+  <!--Testimonio VIP-->
+  <div class="testimonio-vip d-flex align-ites-start mb-4 p-3 border rounded shadow-sm">
+  <!--Foto o imagen del cliente-->
+    <img src="img/clientevip1.jpg" alt="Foto de Cliente VIP"
+    class="rounded-circle me-3" width="70" height="70">
+      <!--Contenido del testimonio-->
+      <div>
+        <h5 class="mb-1 fw-bold"> Cliente VIP</h5>
+        <p class="mb-0">
+        "The Wishbone Café ha sido mi cafetería favorita desde su apertura. La frescura de sus productos y su expericencia temática es increíble" </p>
+      </div>
+  </div>
+  <!--Testimonio Regular-->
+    <div class="d-flex align-item-start mb-4 p-3 border rounded">
+      <!--Foto o imagen del cliente-->
+      <img src="img/clienteregular1.jpg" alt="Foto de Cliente Regular"
+      class="rounded-circle me-3" width="70" height="70">
+      <!--Contenido del testimonio-->
+      <div>
+        <h5 class="mb-1 fw-bold"> Cliente Regular </h5>
+        <p class="mb-0">
+          "Gran lugar para pasar la tarde solo o en compañia" </p>
+      </div>
+    </div>
+  </section>
+<section class="container my-5">
+<!--Testimonio VIP-->
+  <div class="testimonio-vip d-flex align-ites-start mb-4 p-3 border rounded shadow-sm">
+  <!--Foto o imagen del cliente-->
+    <img src="img/clientevip2.jpg" alt="Foto de Cliente VIP"
+    class="rounded-circle me-3" width="70" height="70">
+      <!--Contenido del testimonio-->
+      <div>
+        <h5 class="mb-1 fw-bold"> Cliente VIP</h5>
+        <p class="mb-0">
+        "Vengo todos los fines de semana y la calidad de sus productos jamás me ha decepcionado" </p>
+      </div>
+  </div>
+  <!--Testimonio Regular-->
+    <div class="d-flex align-item-start mb-4 p-3 border rounded">
+      <!--Foto o imagen del cliente-->
+      <img src="img/clienteregular2.jpg" alt="Foto de Cliente Regular"
+      class="rounded-circle me-3" width="70" height="70">
+      <!--Contenido del testimonio-->
+      <div>
+        <h5 class="mb-1 fw-bold"> Cliente Regular </h5>
+        <p class="mb-0">
+          "Perfecto ambiente para pasar una tarde con amigos y buena música" </p>
+      </div>
+    </div>
+</section>
+
+  <!-- ==================== NAVS Y TABS ==================== -->
+  <!-- Chicos: Aquí usamos pestañas para mostrar distintos contenidos -->
+  <section class="container my-5">
+    <h2>Navegación por pestañas (Tabs)</h2>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">Hechizos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">Mis deseos</button>
+      </li>
+    </ul>
+    <div class="tab-content mt-3">
+      <div class="tab-pane fade show active" id="home" role="tabpanel">
+        <p>Contenido de la pestaña Hechizos: descubre nuestras bebidas inspiradas en símbolos de buena suerte.</p>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel">
+        <p>Contenido de Mis deseos: aquí podrás ver tus pedidos y bebidas favoritas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MODAL ==================== -->
+  <!-- Chicos: Este modal se activa desde el botón "Más información" -->
+  <div class="modal fade" id="modalIA" tabindex="-1" aria-labelledby="modalIALabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalIALabel">Detalles del Taller de Deseos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          En este taller aprenderás a preparar bebidas temáticas, crear amuletos de la suerte y usar símbolos como tréboles, gatos negros y números angelicales para personalizar tu experiencia.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Inscribirme</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== OFFCANVAS ==================== -->
+  <!-- Chicos: Este es un menú lateral oculto que se activa con un botón -->
+  <div class="container text-center my-5">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasInfo" aria-controls="offcanvasInfo">
+      Abrir información lateral
+    </button>
+  </div>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasInfo" aria-labelledby="offcanvasInfoLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasInfoLabel">Más sobre The Wishbone Café</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Descubre las historias detrás de nuestras bebidas y los símbolos de la suerte que usamos en la carta.</p>
+      <p>Síguenos en redes para noticias de eventos, talleres y promociones especiales.</p>
+    </div>
+  </div>
+
+<!-- ================== SECCIÓN INTERACTIVA ================== -->
+<section class="container my-5" id="interactiva">
+    <h2 class="mb-4">Eventos Interactivos</h2>
+</section>
+<!-- -------- onclick -------- -->
+<section class="container my-5">
+    <h3>Evento onclick</h3>
+    <button class="btn btn-warning" onclick="saludar()">Haz clic para saludar</button>
+    <p id="mensajeOnclick" class="mt-3 fw-bold"></p>
+</section>
+<!-- -------- onmouseover -------- -->
+<section class="container my-5">
+    <h3>Evento onmouseover</h3>
+    <div id="cuadroColor"
+    onmouseover="cambiarColor()"
+    onmouseout="restaurarColor()"
+    class="p-5 text-center border rounded"
+    style="background: #eee;">
+      Pasa el cursor por aquí
+    </div>
+  </section>
+  <!--onchange-->
+  <section class="container my-5">
+    <h3> Evento onchange </h3>
+  <select id="selectEjemplo" class="form-select w-50"
+  onchange="mostrarSeleccionEjemplo()">
+    <option value="">Selecciona un producto de nuestro menú(opción) </option>
+    <option value="Wishbone Cup">Wishbone Cup</option>
+    <option value="Star Cup"> Star Cup</option>
+    <option value="Clover Latte">Clover Latte</option>
+  </select>
+  <p id="mensajeOnchange" class="mt-3 fw-bold"></p>
+  </section>
+
+  <!--addEventListener-->
+  <section class="container my-5">
+    <h3> Evento addEventListener</h3>
+    <div class="card shadow-sm" style="width: 20rem;">
+      <img id="cardImagen" class="card-img-top"
+      src="img/releaseparties.jpg" alt="Wishbone Café">
+      <div class="card-body">
+        <h5 class="cardTítulo">
+          Wishbone Café Release Parties</h5>
+        <p class="">
+          Realiza tus propias Release Parties de tus artistas favoritos con nosotros y obtén beneficios exclusivos.</p>
+      <button id="btnCambiarCard" class="btn btn-sucess">
+        Actualizar Infromación </button>
+        </div>
+    </div>
+  </section>
+
+    <!--=========NUEVOS SERVICOS CON IA=========-->
+<!--=========NUEVOS SERVICIOS CON IA=========-->
+<section id="pedidos-online" class="container my-5">
+  <h2 class="mb-4"> ¡Conoce nuestras promociones de cumpleaños!</h2>
+  <p class="text-center">
+    Pide cualquier producto de nuestro menú y descubre nuestras promociones en línea.
+  </p>
+
+  <div class="row g-4">
+    <!--Servicio 1-->
+    <div class="col-md-4">
+      <div class="card p-2" id="card1">
+        <img src="img/servicio1.jpg" class="card-img-top" alt="Make a wish combo">
+        <div class="card-body">
+          <h5 class="card-title">Make a wish combo</h5>
+          <p class="card-text precio">Precio: desde 99 mxn</p>
+          <p class="detalle" id="detalle1">
+            Ordena tu promoción de cumpleaños y pide un deseo.
+          </p>
+          <button class="btn btn-success mb-2 btnSelect1">Seleccionar producto</button>
+          <button class="btn btn-danger btnRemove1">Cancelar orden</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Servicio 2-->
+    <div class="col-md-4">
+      <div class="card p-2" id="card2">
+        <img src="img/servicio2.jpg" class="card-img-top" alt="Birthday Coffee Pack">
+        <div class="card-body">
+          <h5 class="card-title">Birthday Coffee Pack</h5>
+          <p class="card-text precio">Precio: desde 129 mxn</p>
+          <p class="detalle" id="detalle2">
+            Disfruta un paquete especial con café personalizado por tu cumpleaños.
+          </p>
+          <button class="btn btn-success mb-2 btnSelect2">Seleccionar producto</button>
+          <button class="btn btn-danger btnRemove2">Cancelar orden</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Servicio 3-->
+    <div class="col-md-4">
+      <div class="card p-2" id="card3">
+        <img src="img/servicio3.jpg" class="card-img-top" alt="Sweet Birthday Box">
+        <div class="card-body">
+          <h5 class="card-title">Caramel Birthday Box</h5>
+          <p class="card-text precio">Precio: desde 149 mxn</p>
+          <p class="detalle" id="detalle3">
+            Una caja especial con mini postres y un brownie decorado por tu cumpleaños.
+          </p>
+          <button class="btn btn-success mb-2 btnSelect3">Seleccionar producto</button>
+          <button class="btn btn-danger btnRemove3">Cancelar orden</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     BOTÓN WHATSAPP FLOTANTE
+=============================================================== -->
+<a
+  href="https://wa.me/527221234567"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Chatea por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ========== CARRITO OFFCANVAS ========== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="carrito">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">🛒 Tu Carrito</h5>
+    <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <ul id="listaCarrito" class="list-group mb-3"></ul>
+
+    <h5 class="mt-3">Total: $<span id="totalCarrito">0</span> MXN</h5>
+
+    <button class="btn btn-success w-100 mt-3" id="btnFinalizar">Finalizar compra</button>
+    <button class="btn btn-danger w-100 mt-2" id="btnVaciar">Vaciar carrito</button>
+  </div>
+</div>
+
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="bg-dark text-center text-white py-3 mt-5">
+  © 2025 Wishbone Café | Get the long end of the stick 
+  <div class="mt-2">
+    <a href="https://www.facebook.com/conangray" target="_blank" rel="noopener"
+       class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+
+    <a href="https://www.instagram.com/conangray" target="_blank" rel="noopener"
+       class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+
+    <a href="https://www.tiktok.com/@conangray" target="_blank" rel="noopener"
+       class="text-white me-3"><i class="fab fa-tiktok fa-lg"></i></a>
+
+    <a href="https://www.youtube.com/c/conangray" target="_blank" rel="noopener"
+       class="text-white me-3"><i class="fab fa-youtube fa-lg"></i></a>
+
+    <a href="https://x.com/conangray" target="_blank" rel="noopener"
+       class="text-white"><i class="fab fa-x-twitter fa-lg"></i></a>
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- CÓDIGO JS DEL CARRITO (localStorage, cantidades, eliminar, total) -->
+<script>
+/*
+  Estructura de carrito:
+  carrito = [
+    { id: 'Make a wish combo', nombre: 'Make a wish combo', precio: 99, qty: 1 },
+    ...
+  ]
+*/
+
+const STORAGE_KEY = "wishbone_carrito_v1";
+let carrito = [];
+
+/* UTIL: cargar/salvar en localStorage */
+function salvarCarrito(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(carrito));
+}
+function cargarCarrito(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  carrito = raw ? JSON.parse(raw) : [];
+}
+
+/* RENDER */
+function actualizarBadge(){
+  const contador = document.getElementById("contadorCarrito");
+  const totalItems = carrito.reduce((s, it) => s + it.qty, 0);
+  if (contador) contador.textContent = totalItems;
+}
+
+function formatoPrecio(n){ return Number(n).toFixed(0); } // precios en MXN sin decimales según tu plantilla
+
+function renderCarrito(){
+  const ul = document.getElementById("listaCarrito");
+  const totalSpan = document.getElementById("totalCarrito");
+  ul.innerHTML = "";
+  let suma = 0;
+
+  carrito.forEach((item, index) => {
+    suma += item.precio * item.qty;
+
+    const li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between align-items-center flex-wrap";
+
+    li.innerHTML = `
+      <div style="min-width: 140px;">
+        <strong>${item.nombre}</strong>
+        <div class="small text-muted">Precio: ${formatoPrecio(item.precio)} MXN</div>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <div class="qty-controls btn-group" role="group" aria-label="Cantidad">
+          <button class="btn btn-sm btn-outline-secondary" onclick="cambiarCantidad(${index}, -1)" aria-label="Disminuir">-</button>
+          <span class="px-2">${item.qty}</span>
+          <button class="btn btn-sm btn-outline-secondary" onclick="cambiarCantidad(${index}, 1)" aria-label="Aumentar">+</button>
+        </div>
+
+        <div class="text-end ms-3">
+          <div>$${formatoPrecio(item.precio * item.qty)} MXN</div>
+          <button class="btn btn-sm btn-outline-danger mt-1" onclick="eliminarItem(${index})">Eliminar</button>
+        </div>
+      </div>
+    `;
+    ul.appendChild(li);
+  });
+
+  totalSpan.textContent = formatoPrecio(suma);
+  actualizarBadge();
+  salvarCarrito();
+}
+
+/* OPERACIONES */
+function agregarProducto(id, nombre, precio, cantidad = 1){
+  // si ya existe, aumentar qty
+  const idx = carrito.findIndex(it => it.id === id);
+  if (idx > -1){
+    carrito[idx].qty += cantidad;
+  } else {
+    carrito.push({ id, nombre, precio: Number(precio), qty: cantidad });
+  }
+  renderCarrito();
+}
+
+function cambiarCantidad(index, delta){
+  if (!carrito[index]) return;
+  carrito[index].qty += delta;
+  if (carrito[index].qty < 1) carrito[index].qty = 1;
+  renderCarrito();
+}
+
+function eliminarItem(index){
+  carrito.splice(index, 1);
+  renderCarrito();
+}
+
+function vaciarCarrito(){
+  carrito = [];
+  renderCarrito();
+}
+
+/* Finalizar compra - aquí solo hacemos simulación */
+function finalizarCompra(){
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío 😅");
+    return;
+  }
+
+  const total = carrito.reduce((s, it) => s + it.precio * it.qty, 0);
+  // Simulación: mostrar resumen y vaciar carrito
+  let resumen = "Gracias por tu compra 💖\\nResumen:\\n";
+  carrito.forEach(it => resumen += `${it.nombre} x${it.qty} - ${formatoPrecio(it.precio * it.qty)} MXN\\n`);
+  resumen += `Total: ${formatoPrecio(total)} MXN\\n\\n(Esto es una simulación)`;
+  alert(resumen);
+
+  vaciarCarrito();
+}
+
+/* Conexión con botones de tu HTML (btnSelect1, btnSelect2, btnSelect3) */
+document.addEventListener("DOMContentLoaded", () => {
+  // cargar carrito desde localStorage
+  cargarCarrito();
+  renderCarrito();
+
+  // conectar botones de selección si existen
+  const b1 = document.querySelector(".btnSelect1");
+  if (b1) b1.addEventListener("click", () => agregarProducto("wish_1", "Make a wish combo", 99, 1));
+  const b2 = document.querySelector(".btnSelect2");
+  if (b2) b2.addEventListener("click", () => agregarProducto("wish_2", "Birthday Coffee Pack", 129, 1));
+  const b3 = document.querySelector(".btnSelect3");
+  if (b3) b3.addEventListener("click", () => agregarProducto("wish_3", "Caramel Birthday Box", 149, 1));
+
+  // conectar botones 'Cancelar orden' para quitar todo ese producto si existe
+  const r1 = document.querySelector(".btnRemove1");
+  if (r1) r1.addEventListener("click", () => {
+    const idx = carrito.findIndex(it => it.id === "wish_1");
+    if (idx > -1) { eliminarItem(idx); } else { alert("No hay ese producto en el carrito."); }
+  });
+  const r2 = document.querySelector(".btnRemove2");
+  if (r2) r2.addEventListener("click", () => {
+    const idx = carrito.findIndex(it => it.id === "wish_2");
+    if (idx > -1) { eliminarItem(idx); } else { alert("No hay ese producto en el carrito."); }
+  });
+  const r3 = document.querySelector(".btnRemove3");
+  if (r3) r3.addEventListener("click", () => {
+    const idx = carrito.findIndex(it => it.id === "wish_3");
+    if (idx > -1) { eliminarItem(idx); } else { alert("No hay ese producto en el carrito."); }
+  });
+
+  // botones finalizar y vaciar
+  const btnFinalizar = document.getElementById("btnFinalizar");
+  if (btnFinalizar) btnFinalizar.addEventListener("click", finalizarCompra);
+  const btnVaciar = document.getElementById("btnVaciar");
+  if (btnVaciar) btnVaciar.addEventListener("click", () => {
+    if (confirm("¿Vaciar carrito?")) vaciarCarrito();
+  });
+
+  // también permitir agregar via data-attributes si en el futuro agregas botones así
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-agregar-nombre][data-agregar-precio]");
+    if (el) {
+      const nombre = el.getAttribute("data-agregar-nombre");
+      const precio = Number(el.getAttribute("data-agregar-precio"));
+      const id = el.getAttribute("data-agregar-id") || nombre;
+      agregarProducto(id, nombre, precio, 1);
+    }
+  });
+});
+</script>
+
+<!--  -->
+<script src="app.js"></script>
+
+</body>
+</html>
+

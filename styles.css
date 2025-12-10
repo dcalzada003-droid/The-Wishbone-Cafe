@@ -1,0 +1,195 @@
+/* ============================
+   PALETA DEL LOGO (Wishbone Café)
+   Crema #F7EFE5
+   Café suave #D8C4B6
+   Café oscuro #5C4033
+   Verde amuleto #3E6843
+   Dorado suave #C9A86A
+=============================== */
+
+:root {
+    --crema: #f9ecde;
+    --cafe-suave: #D8C4B6;
+    --cafe-oscuro: #5C4033;
+    --azul-amuleto: #608cca;
+    --dorado: #C9A86A;
+}
+
+/* ============================
+   ESTILO GENERAL
+=============================== */
+body {
+    background-color: var(--crema);
+    font-family: "Poppins", sans-serif;
+    color: var(--cafe-oscuro);
+}
+
+h2, h5 {
+    color: var(--verde-amuleto);
+    font-weight: 700;
+}
+
+/* ============================
+   NAVBAR
+=============================== */
+.navbar {
+    background-color: var(--crema) !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.navbar-brand span {
+    color: var(--cafe-oscuro);
+    font-size: 1.3rem;
+}
+
+.nav-link {
+    color: var(--cafe-oscuro) !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--verde-amuleto) !important;
+}
+
+/* ============================
+   CARRUSEL
+=============================== */
+.carousel-caption h5 {
+    font-size: 2rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.carousel-caption p {
+    font-size: 1.1rem;
+}
+
+/* Botones del carrusel */
+.carousel .btn-primary {
+    background-color: var(--verde-amuleto);
+    border: none;
+}
+
+.carousel .btn-primary:hover {
+    background-color: #2c4a31;
+}
+
+/* ============================
+   TARJETAS
+=============================== */
+.card {
+    border: none;
+    background-color: rgb(207, 240, 255);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.card-title {
+    color: var(--verde-amuleto);
+    font-weight: 600;
+}
+
+.card-footer {
+    background-color: var(--crema);
+    color: var(--cafe-oscuro);
+    font-weight: 500;
+}
+
+/* ============================
+   FORMULARIO
+=============================== */
+form {
+    background-color: var(--crema);
+    border: 2px solid var(--cafe-suave);
+    border-radius: 20px;
+}
+
+.form-label {
+    color: var(--cafe-oscuro);
+}
+
+input, textarea, select {
+    border-radius: 10px !important;
+    border: 1px solid var(--cafe-suave) !important;
+}
+
+.btn-success {
+    background-color: var(--verde-amuleto) !important;
+    border: none !important;
+}
+
+.btn-success:hover {
+    background-color: #2c4a31 !important;
+}
+
+/* ============================
+   TESTIMONIOS
+=============================== */
+.testimonio-vip, 
+.d-flex.border.rounded {
+    background-color: white !important;
+    border: 2px solid var(--cafe-suave) !important;
+    border-radius: 20px !important;
+}
+
+.testimonio-vip h5, 
+.d-flex h5 {
+    color: var(--verde-amuleto);
+}
+
+/* ============================
+   TABS
+=============================== */
+.nav-tabs .nav-link.active {
+    background-color: var(--azul-amuleto);
+    color: white !important;
+    border-radius: 10px 10px 0 0;
+}
+
+.nav-tabs .nav-link {
+    color: var(--cafe-oscuro);
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--verde-amuleto);
+}
+
+/* ============================
+   MODAL
+=============================== */
+.modal-content {
+    border-radius: 18px;
+    border: 2px solid var(--cafe-suave);
+}
+
+.modal-header {
+    background-color: var(--crema);
+}
+
+.modal-footer .btn-primary {
+    background-color: var(--verde-amuleto);
+    border: none;
+}
+
+/* ============================
+   OFFCANVAS
+=============================== */
+.offcanvas {
+    background-color: var(--crema);
+    border-left: 3px solid var(--cafe-suave);
+}
+
+/* ============================
+   FOOTER
+=============================== */
+footer {
+    background-color: var(--cafe-suave) !important;
+    color: var(--cafe-oscuro) !important;
+    font-weight: 500;
+}
